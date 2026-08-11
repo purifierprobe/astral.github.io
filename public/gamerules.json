@@ -92,6 +92,57 @@
       }
     },
     {
+      "id": "stardew_valley",
+      "name": "Stardew Valley",
+      "color": "#5B8C5A",
+      "icon": "grass",
+      "steam_app_id": 413150,
+      "icon_asset": "assets/games/stardew_valley/icon.png",
+      "grid_asset": "assets/games/stardew_valley/grid.png",
+      "show_in_picker": true,
+      "sort": 30,
+      "platforms": {
+        "windows": {
+          "network": {
+            "enable_udp_broadcast_relay": false
+          },
+          "lan_game_discover": {
+            "enabled": true,
+            "host_only": false,
+            "interval_ms": 5000,
+            "ttl_ms": 18000,
+            "entries": [
+              {
+                "id": "stardew",
+                "label": "Stardew Valley",
+                "type": "static_port",
+                "port": 24642
+              }
+            ]
+          }
+        },
+        "android": {
+          "network": {
+            "enable_udp_broadcast_relay": false
+          },
+          "lan_game_discover": {
+            "enabled": true,
+            "host_only": false,
+            "interval_ms": 5000,
+            "ttl_ms": 18000,
+            "entries": [
+              {
+                "id": "stardew",
+                "label": "Stardew Valley",
+                "type": "static_port",
+                "port": 24642
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
       "id": "other",
       "name": "其他",
       "color": "#6B7280",
