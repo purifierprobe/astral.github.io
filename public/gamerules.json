@@ -33,13 +33,13 @@
       }
     },
     {
-      "id": "terraria",
-      "name": "Terraria",
-      "color": "#2E7D5B",
-      "icon": "forest",
-      "steam_app_id": 105600,
-      "icon_asset": "assets/games/terraria/icon.png",
-      "grid_asset": "assets/games/terraria/grid.png",
+      "id": "mindustry",
+      "name": "Mindustry",
+      "color": "#C4A35A",
+      "icon": "precision_manufacturing",
+      "steam_app_id": 1127400,
+      "icon_asset": "assets/games/mindustry/icon.png",
+      "grid_asset": "assets/games/mindustry/grid.png",
       "show_in_picker": true,
       "sort": 20,
       "platforms": {
@@ -50,78 +50,41 @@
           "lan_game_discover": {
             "enabled": true,
             "host_only": false,
-            "interval_ms": 5000,
+            "interval_ms": 4000,
             "ttl_ms": 18000,
             "entries": [
               {
-                "id": "terraria",
-                "label": "Terraria",
-                "type": "static_port",
-                "port": 7777
+                "id": "mindustry",
+                "label": "Mindustry",
+                "type": "udp_probe",
+                "probe_hex": "fe01",
+                "parser": "mindustry_server",
+                "multicast": "227.2.7.7",
+                "multicast_port": 20151,
+                "port": 6567
               }
             ]
           }
-        }
-      }
-    },
-    {
-      "id": "valheim",
-      "name": "Valheim",
-      "color": "#4A6FA5",
-      "icon": "ac_unit",
-      "steam_app_id": 892970,
-      "icon_asset": "assets/games/valheim/icon.png",
-      "grid_asset": "assets/games/valheim/grid.png",
-      "show_in_picker": true,
-      "sort": 30,
-      "platforms": {
-        "windows": {
+        },
+        "android": {
           "network": {
             "enable_udp_broadcast_relay": false
           },
           "lan_game_discover": {
             "enabled": true,
             "host_only": false,
-            "interval_ms": 5000,
+            "interval_ms": 4000,
             "ttl_ms": 18000,
             "entries": [
               {
-                "id": "valheim",
-                "label": "Valheim",
-                "type": "static_port",
-                "port": 2456
-              }
-            ]
-          }
-        }
-      }
-    },
-    {
-      "id": "palworld",
-      "name": "Palworld",
-      "color": "#E07A3D",
-      "icon": "pets",
-      "steam_app_id": 1623730,
-      "icon_asset": "assets/games/palworld/icon.png",
-      "grid_asset": "assets/games/palworld/grid.png",
-      "show_in_picker": true,
-      "sort": 40,
-      "platforms": {
-        "windows": {
-          "network": {
-            "enable_udp_broadcast_relay": false
-          },
-          "lan_game_discover": {
-            "enabled": true,
-            "host_only": false,
-            "interval_ms": 5000,
-            "ttl_ms": 18000,
-            "entries": [
-              {
-                "id": "palworld",
-                "label": "Palworld",
-                "type": "static_port",
-                "port": 8211
+                "id": "mindustry",
+                "label": "Mindustry",
+                "type": "udp_probe",
+                "probe_hex": "fe01",
+                "parser": "mindustry_server",
+                "multicast": "227.2.7.7",
+                "multicast_port": 20151,
+                "port": 6567
               }
             ]
           }
