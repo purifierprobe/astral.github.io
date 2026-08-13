@@ -25,7 +25,14 @@
                 "type": "udp_multicast",
                 "multicast": "224.0.2.60",
                 "multicast_port": 4445,
-                "parser": "minecraft_motd"
+                "parser": "minecraft_motd",
+                "params": {
+                  "title_template": "{player} · {game}",
+                  "inject_local": true,
+                  "inject_bind": "127.0.0.1",
+                  "inject_mode": "both",
+                  "forward_local": true
+                }
               }
             ]
           }
