@@ -1,5 +1,5 @@
 {
-  "version": 1,
+  "version": 2,
   "games": [
     {
       "id": "minecraft",
@@ -14,27 +14,10 @@
       "platforms": {
         "windows": {
           "lan_game_discover": {
-            "enabled": true,
-            "host_only": false,
-            "interval_ms": 4000,
-            "ttl_ms": 18000,
-            "entries": [
-              {
-                "id": "mc",
-                "label": "Minecraft",
-                "type": "udp_multicast",
-                "multicast": "224.0.2.60",
-                "multicast_port": 4445,
-                "parser": "minecraft_motd",
-                "params": {
-                  "title_template": "{player} · {game}",
-                  "inject_local": true,
-                  "inject_bind": "127.0.0.1",
-                  "inject_mode": "both",
-                  "forward_local": true
-                }
-              }
-            ]
+            "type": "udp_multicast",
+            "multicast": "224.0.2.60:4445",
+            "parser": "minecraft_motd",
+            "title": "{player} · {game}"
           }
         }
       }
@@ -51,49 +34,12 @@
       "sort": 20,
       "platforms": {
         "windows": {
-          "network": {
-            "enable_udp_broadcast_relay": false
-          },
           "lan_game_discover": {
-            "enabled": true,
-            "host_only": false,
-            "interval_ms": 4000,
-            "ttl_ms": 18000,
-            "entries": [
-              {
-                "id": "mindustry",
-                "label": "Mindustry",
-                "type": "udp_probe",
-                "probe_hex": "fe01",
-                "parser": "mindustry_server",
-                "multicast": "227.2.7.7",
-                "multicast_port": 20151,
-                "port": 6567
-              }
-            ]
-          }
-        },
-        "android": {
-          "network": {
-            "enable_udp_broadcast_relay": false
-          },
-          "lan_game_discover": {
-            "enabled": true,
-            "host_only": false,
-            "interval_ms": 4000,
-            "ttl_ms": 18000,
-            "entries": [
-              {
-                "id": "mindustry",
-                "label": "Mindustry",
-                "type": "udp_probe",
-                "probe_hex": "fe01",
-                "parser": "mindustry_server",
-                "multicast": "227.2.7.7",
-                "multicast_port": 20151,
-                "port": 6567
-              }
-            ]
+            "type": "udp_probe",
+            "probe": "fe01",
+            "parser": "mindustry_server",
+            "multicast": "227.2.7.7:20151",
+            "port": 6567
           }
         }
       }
@@ -110,41 +56,9 @@
       "sort": 30,
       "platforms": {
         "windows": {
-          "network": {
-            "enable_udp_broadcast_relay": false
-          },
           "lan_game_discover": {
-            "enabled": true,
-            "host_only": false,
-            "interval_ms": 5000,
-            "ttl_ms": 18000,
-            "entries": [
-              {
-                "id": "stardew",
-                "label": "Stardew Valley",
-                "type": "static_port",
-                "port": 24642
-              }
-            ]
-          }
-        },
-        "android": {
-          "network": {
-            "enable_udp_broadcast_relay": false
-          },
-          "lan_game_discover": {
-            "enabled": true,
-            "host_only": false,
-            "interval_ms": 5000,
-            "ttl_ms": 18000,
-            "entries": [
-              {
-                "id": "stardew",
-                "label": "Stardew Valley",
-                "type": "static_port",
-                "port": 24642
-              }
-            ]
+            "type": "static_port",
+            "port": 24642
           }
         }
       }
@@ -158,14 +72,7 @@
       "icon_asset": "assets/games/terraria/icon.png",
       "grid_asset": "assets/games/terraria/grid.png",
       "show_in_picker": true,
-      "sort": 40,
-      "platforms": {
-        "windows": {
-          "network": {
-            "enable_udp_broadcast_relay": false
-          }
-        }
-      }
+      "sort": 40
     },
     {
       "id": "valheim",
@@ -176,14 +83,7 @@
       "icon_asset": "assets/games/valheim/icon.png",
       "grid_asset": "assets/games/valheim/grid.png",
       "show_in_picker": true,
-      "sort": 50,
-      "platforms": {
-        "windows": {
-          "network": {
-            "enable_udp_broadcast_relay": false
-          }
-        }
-      }
+      "sort": 50
     },
     {
       "id": "palworld",
@@ -194,14 +94,7 @@
       "icon_asset": "assets/games/palworld/icon.png",
       "grid_asset": "assets/games/palworld/grid.png",
       "show_in_picker": true,
-      "sort": 60,
-      "platforms": {
-        "windows": {
-          "network": {
-            "enable_udp_broadcast_relay": false
-          }
-        }
-      }
+      "sort": 60
     },
     {
       "id": "factorio",
@@ -212,14 +105,7 @@
       "icon_asset": "assets/games/factorio/icon.png",
       "grid_asset": "assets/games/factorio/grid.png",
       "show_in_picker": true,
-      "sort": 70,
-      "platforms": {
-        "windows": {
-          "network": {
-            "enable_udp_broadcast_relay": false
-          }
-        }
-      }
+      "sort": 70
     },
     {
       "id": "dont_starve_together",
@@ -230,14 +116,7 @@
       "icon_asset": "assets/games/dont_starve_together/icon.png",
       "grid_asset": "assets/games/dont_starve_together/grid.png",
       "show_in_picker": true,
-      "sort": 80,
-      "platforms": {
-        "windows": {
-          "network": {
-            "enable_udp_broadcast_relay": false
-          }
-        }
-      }
+      "sort": 80
     },
     {
       "id": "project_zomboid",
@@ -248,14 +127,7 @@
       "icon_asset": "assets/games/project_zomboid/icon.png",
       "grid_asset": "assets/games/project_zomboid/grid.png",
       "show_in_picker": true,
-      "sort": 90,
-      "platforms": {
-        "windows": {
-          "network": {
-            "enable_udp_broadcast_relay": false
-          }
-        }
-      }
+      "sort": 90
     },
     {
       "id": "v_rising",
@@ -266,14 +138,7 @@
       "icon_asset": "assets/games/v_rising/icon.png",
       "grid_asset": "assets/games/v_rising/grid.png",
       "show_in_picker": true,
-      "sort": 100,
-      "platforms": {
-        "windows": {
-          "network": {
-            "enable_udp_broadcast_relay": false
-          }
-        }
-      }
+      "sort": 100
     },
     {
       "id": "satisfactory",
@@ -284,14 +149,7 @@
       "icon_asset": "assets/games/satisfactory/icon.png",
       "grid_asset": "assets/games/satisfactory/grid.png",
       "show_in_picker": true,
-      "sort": 110,
-      "platforms": {
-        "windows": {
-          "network": {
-            "enable_udp_broadcast_relay": false
-          }
-        }
-      }
+      "sort": 110
     },
     {
       "id": "seven_days_to_die",
@@ -302,14 +160,7 @@
       "icon_asset": "assets/games/seven_days_to_die/icon.png",
       "grid_asset": "assets/games/seven_days_to_die/grid.png",
       "show_in_picker": true,
-      "sort": 120,
-      "platforms": {
-        "windows": {
-          "network": {
-            "enable_udp_broadcast_relay": false
-          }
-        }
-      }
+      "sort": 120
     },
     {
       "id": "ark",
@@ -320,14 +171,7 @@
       "icon_asset": "assets/games/ark/icon.png",
       "grid_asset": "assets/games/ark/grid.png",
       "show_in_picker": true,
-      "sort": 130,
-      "platforms": {
-        "windows": {
-          "network": {
-            "enable_udp_broadcast_relay": false
-          }
-        }
-      }
+      "sort": 130
     },
     {
       "id": "rust",
@@ -338,14 +182,7 @@
       "icon_asset": "assets/games/rust/icon.png",
       "grid_asset": "assets/games/rust/grid.png",
       "show_in_picker": true,
-      "sort": 140,
-      "platforms": {
-        "windows": {
-          "network": {
-            "enable_udp_broadcast_relay": false
-          }
-        }
-      }
+      "sort": 140
     },
     {
       "id": "other",
@@ -353,16 +190,7 @@
       "color": "#6B7280",
       "icon": "sports_esports_outlined",
       "show_in_picker": true,
-      "sort": 900,
-      "platforms": {
-        "windows": {
-          "network": {
-            "enable_udp_broadcast_relay": false
-          },
-          "magic_wall": { "enabled": false, "rules": [] },
-          "forwards": []
-        }
-      }
+      "sort": 900
     }
   ]
 }
