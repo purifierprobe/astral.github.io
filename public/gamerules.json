@@ -1,5 +1,5 @@
 {
-    "version":  3,
+    "version": 4,
     "games":  [
                   {
                       "id":  "minecraft",
@@ -73,9 +73,6 @@
                                                                        "process":  [
                                                                                        "Raft.exe"
                                                                                    ],
-                                                                       "window":  [
-                                                                                      "Raft"
-                                                                                  ],
                                                                        "dll":  "AstralRaftNet.dll",
                                                                        "namespace":  "AstralRaftNet",
                                                                        "class":  "Loader",
