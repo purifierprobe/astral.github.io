@@ -34,7 +34,13 @@ const heroActions = actions || defaultActions;
 ---
 
 <div class="hero-wrapper">
-  
+  <a class="astral-next-banner" href="https://next.astral.fan/game/">
+    <div class="banner-content">
+      <span class="banner-icon">🎮</span>
+      <span class="banner-text">Astral Game 已上线，点邀请链接即可自动进房</span>
+      <span class="banner-date">前往 next.astral.fan</span>
+    </div>
+  </a>
 
   <div id="interactive-hero" class="hero-container">
     <div class="hero-left">
@@ -413,10 +419,16 @@ observer.observe(document.documentElement, {
 
   /* AstralNext 倒计时横条 */
   .astral-next-banner {
+    display: block;
     width: 100%;
     padding: 0.75rem 2rem;
     position: relative;
     z-index: 1;
+    text-decoration: none;
+  }
+
+  .astral-next-banner:hover .banner-text {
+    text-decoration: underline;
   }
 
   .banner-content {

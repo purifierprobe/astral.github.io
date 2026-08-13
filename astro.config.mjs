@@ -10,6 +10,10 @@ import sitemap from '@astrojs/sitemap';
 export default defineConfig({
 	site:'https://astral.fan',
 	integrations: [starlight({
+		banner: {
+			content:
+				'Astral Game 已上线：点邀请链接即可自动进房。<a href="https://next.astral.fan/game/">前往下载 →</a>',
+		},
 		plugins: [
 			starlightImageZoom(),
 			starlightSiteGraph({
