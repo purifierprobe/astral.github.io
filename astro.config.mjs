@@ -16,6 +16,10 @@ export default defineConfig({
 		'/tutorials/raft-multiplayer/': 'https://next.astral.fan/game/',
 		'/tutorials/minecraft-multiplayer': 'https://next.astral.fan/game/',
 		'/tutorials/minecraft-multiplayer/': 'https://next.astral.fan/game/',
+		'/server-config/server-list': '/user-guide/server-management/',
+		'/server-config/server-list/': '/user-guide/server-management/',
+		'/public-servers/list': '/user-guide/server-management/',
+		'/public-servers/list/': '/user-guide/server-management/',
 	},
 	integrations: [starlight({
 		plugins: [
@@ -89,7 +93,6 @@ export default defineConfig({
 			{
 				label: '🌐 服务器配置',
 				items: [
-					{ label: '服务器列表', slug: 'server-config/server-list' },
 					{ label: '服务器部署', slug: 'server-config/server-deployment' },
 				],
 			},
