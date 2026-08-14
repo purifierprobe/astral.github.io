@@ -12,6 +12,10 @@ export default defineConfig({
 	redirects: {
 		'/preview/download': 'https://next.astral.fan/',
 		'/preview/download/': 'https://next.astral.fan/',
+		'/tutorials/raft-multiplayer': 'https://next.astral.fan/game/',
+		'/tutorials/raft-multiplayer/': 'https://next.astral.fan/game/',
+		'/tutorials/minecraft-multiplayer': 'https://next.astral.fan/game/',
+		'/tutorials/minecraft-multiplayer/': 'https://next.astral.fan/game/',
 	},
 	integrations: [starlight({
 		plugins: [
@@ -77,9 +81,9 @@ export default defineConfig({
 			{
 				label: '🎮 游戏联机教程',
 				items: [
-					{ label: 'Minecraft', slug: 'tutorials/minecraft-multiplayer' },
+					{ label: 'Minecraft（新版）', link: 'https://next.astral.fan/game/' },
 					{ label: 'CS:GO 2', slug: 'tutorials/csgo2-guide' },
-					{ label: 'Raft', slug: 'tutorials/raft-multiplayer' },
+					{ label: 'Raft（新版）', link: 'https://next.astral.fan/game/' },
 				],
 			},
 			{
