@@ -9,6 +9,10 @@ import sitemap from '@astrojs/sitemap';
 // https://astro.build/config
 export default defineConfig({
 	site:'https://astral.fan',
+	redirects: {
+		'/preview/download': 'https://next.astral.fan/',
+		'/preview/download/': 'https://next.astral.fan/',
+	},
 	integrations: [starlight({
 		banner: {
 			content:
