@@ -14,10 +14,6 @@ export default defineConfig({
 		'/preview/download/': 'https://next.astral.fan/',
 	},
 	integrations: [starlight({
-		banner: {
-			content:
-				'Astral Game 已上线：点邀请链接即可自动进房。<a href="https://next.astral.fan/game/">前往下载 →</a>',
-		},
 		plugins: [
 			starlightImageZoom(),
 			starlightSiteGraph({
