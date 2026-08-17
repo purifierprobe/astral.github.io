@@ -1,5 +1,5 @@
 {
-    "version": 4,
+    "version": 5,
     "games":  [
                   {
                       "id":  "minecraft",
@@ -51,8 +51,8 @@
                       "icon":  "sailing",
                       "steam_app_id":  648800,
                       "sgdb_game_id":  18740,
-                      "icon_asset":  "games/raft/icon.png",
-                      "grid_asset":  "games/raft/grid.png",
+                      "icon_asset":  "assets/games/raft/icon.png",
+                      "grid_asset":  "assets/games/raft/grid.png",
                       "show_in_picker":  true,
                       "sort":  22,
                       "platforms":  {
@@ -120,7 +120,33 @@
                       "icon_asset":  "assets/games/valheim/icon.png",
                       "grid_asset":  "assets/games/valheim/grid.png",
                       "show_in_picker":  true,
-                      "sort":  50
+                      "sort":  50,
+                      "platforms":  {
+                                        "windows":  {
+                                                        "network":  {
+                                                                        "enable_udp_broadcast_relay":  true
+                                                                    },
+                                                        "lan_game_discover":  {
+                                                                                  "id":  "valheim_lan",
+                                                                                  "type":  "udp_broadcast",
+                                                                                  "port":  2460,
+                                                                                  "parser":  "valheim_lan",
+                                                                                  "title":  "{player} * Astral",
+                                                                                  "label":  "Valheim"
+                                                                              },
+                                                        "inject":  {
+                                                                       "type":  "mono",
+                                                                       "process":  [
+                                                                                       "valheim.exe"
+                                                                                   ],
+                                                                       "dll":  "AstralValheimNet.dll",
+                                                                       "namespace":  "AstralValheimNet",
+                                                                       "class":  "Loader",
+                                                                       "method":  "Init",
+                                                                       "delay_seconds":  8
+                                                                   }
+                                                    }
+                                    }
                   },
                   {
                       "id":  "palworld",
@@ -228,8 +254,8 @@
                       "icon":  "military_tech",
                       "steam_app_id":  9420,
                       "sgdb_game_id":  31467,
-                      "icon_asset":  "games/forged_alliance/icon.png",
-                      "grid_asset":  "games/forged_alliance/grid.png",
+                      "icon_asset":  "assets/games/forged_alliance/icon.png",
+                      "grid_asset":  "assets/games/forged_alliance/grid.png",
                       "show_in_picker":  true,
                       "sort":  25,
                       "platforms":  {
