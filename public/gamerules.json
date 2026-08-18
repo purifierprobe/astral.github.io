@@ -284,6 +284,27 @@
                                     }
                   },
                   {
+                      "id":  "payday_the_heist",
+                      "name":  "PAYDAY: The Heist",
+                      "color":  "#A0522D",
+                      "icon":  "hardware",
+                      "steam_app_id":  24240,
+                      "icon_asset":  "assets/games/payday_the_heist/icon.png",
+                      "grid_asset":  "assets/games/payday_the_heist/grid.png",
+                      "show_in_picker":  true,
+                      "sort":  150,
+                      "platforms":  {
+                                        "windows":  {
+                                                        "magic_wall": {
+                                                                          "steam.exe": [
+                                                                              { "action": "block", "protocol": "udp", "direction": "both", "remote_port": "3478" },
+                                                                              { "action": "block", "protocol": "udp", "direction": "both", "remote_port": "4379-4400"}
+                                                                                       ]
+                                                        }
+                                                    }
+                                    }
+                  },
+                  {
                       "id":  "other",
                       "name":  "其他",
                       "color":  "#6B7280",
