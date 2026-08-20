@@ -308,6 +308,48 @@
                                     }
                   },
                   {
+                      "id":  "left_4_dead",
+                      "name":  "Left 4 Dead",
+                      "color":  "#A0522D",
+                      "icon":  "hardware",
+                      "steam_app_id":  500,
+                      "icon_asset":  "assets/games/left_4_dead/icon.png",
+                      "grid_asset":  "assets/games/left_4_dead/grid.png",
+                      "show_in_picker":  true,
+                      "sort":  160,
+                      "platforms":  {
+                                        "windows":  {
+                                                        "magic_wall": {
+                                                                          "steam.exe": [
+                                                                              { "action": "block", "protocol": "udp", "direction": "both", "remote_port": "3478" },
+                                                                              { "action": "block", "protocol": "udp", "direction": "both", "remote_port": "4379-4400"}
+                                                                                       ]
+                                                        }
+                                                    }
+                                    }
+                  },
+                  {
+                      "id":  "left_4_dead_2",
+                      "name":  "Left 4 Dead 2",
+                      "color":  "#A0522D",
+                      "icon":  "hardware",
+                      "steam_app_id":  550,
+                      "icon_asset":  "assets/games/left_4_dead_2/icon.png",
+                      "grid_asset":  "assets/games/left_4_dead_2/grid.png",
+                      "show_in_picker":  true,
+                      "sort":  170,
+                      "platforms":  {
+                                        "windows":  {
+                                                        "magic_wall": {
+                                                                          "steam.exe": [
+                                                                              { "action": "block", "protocol": "udp", "direction": "both", "remote_port": "3478" },
+                                                                              { "action": "block", "protocol": "udp", "direction": "both", "remote_port": "4379-4400"}
+                                                                                       ]
+                                                        }
+                                                    }
+                                    }
+                  },
+                  {
                       "id":  "other",
                       "name":  "其他",
                       "color":  "#6B7280",
