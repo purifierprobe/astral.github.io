@@ -1,5 +1,5 @@
 {
-    "version": 6,
+    "version": 5,
     "games":  [
                   {
                       "id":  "minecraft",
@@ -13,9 +13,6 @@
                       "sort":  10,
                       "platforms":  {
                                         "windows":  {
-                                                        "network":  {
-                                                                        "protocol":  "tcp"
-                                                                    },
                                                         "lan_game_discover":  {
                                                                                   "type":  "udp_multicast",
                                                                                   "multicast":  "224.0.2.60:4445",
@@ -349,9 +346,20 @@
                                                     }
                                     }
                   },
+                   {
+                      "id":  "sudden_strike_II",
+                      "name":  "Sudden Strike II",
+                      "color":  "#A0522D",
+                      "icon":  "hardware",
+                      "steam_app_id":  612520,
+                      "icon_asset":  "assets/games/sudden_strike_II/icon.png",
+                      "grid_asset":  "assets/games/sudden_strike_II/grid.png",
+                      "show_in_picker":  true,
+                      "sort":  180
+                  },
                   {
                       "id":  "other",
-                      "name":  "其他",
+                      "name":  "其他2",
                       "color":  "#6B7280",
                       "icon":  "sports_esports_outlined",
                       "show_in_picker":  true,
