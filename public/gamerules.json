@@ -1,5 +1,5 @@
 {
-    "version": 5,
+    "version": 6,
     "games":  [
                   {
                       "id":  "minecraft",
@@ -13,6 +13,9 @@
                       "sort":  10,
                       "platforms":  {
                                         "windows":  {
+                                                        "network":  {
+                                                                        "protocol":  "tcp"
+                                                                    },
                                                         "lan_game_discover":  {
                                                                                   "type":  "udp_multicast",
                                                                                   "multicast":  "224.0.2.60:4445",
