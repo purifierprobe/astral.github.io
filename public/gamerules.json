@@ -362,7 +362,7 @@
                   },
                   {
                       "id":  "other",
-                      "name":  "其他2",
+                      "name":  "其他",
                       "color":  "#6B7280",
                       "icon":  "sports_esports_outlined",
                       "show_in_picker":  true,
