@@ -1,5 +1,5 @@
 {
-  "version": 7,
+  "version": 8,
   "games": [
     {
       "id": "minecraft",
@@ -268,8 +268,8 @@
     },
     {
       "id": "forged_alliance",
-      "name": "Forged Alliance",
-      "name_zh": "最高指挥官：锻造联盟",
+      "name": "Supreme Commander: Forged Alliance",
+      "name_zh": "最高指挥官：钢铁联盟",
       "color": "#3B6EA5",
       "icon": "military_tech",
       "steam_app_id": 9420,
@@ -306,7 +306,7 @@
     {
       "id": "payday_the_heist",
       "name": "PAYDAY: The Heist",
-      "name_zh": "收获日",
+      "name_zh": "收获日：掠夺",
       "color": "#A0522D",
       "icon": "hardware",
       "steam_app_id": 24240,
@@ -402,7 +402,7 @@
     {
       "id": "sudden_strike_II",
       "name": "Sudden Strike II",
-      "name_zh": "闪电突袭2",
+      "name_zh": "突袭2",
       "color": "#A0522D",
       "icon": "hardware",
       "steam_app_id": 612520,
