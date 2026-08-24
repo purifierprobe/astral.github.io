@@ -28,6 +28,35 @@
       }
     },
     {
+      "id":  "grand_theft_auto_v",
+      "name":  "Grand Theft Auto V",
+      "name_zh": "侠盗猎车手5",
+      "description": "同时支持传承版和增强版以及跨平台联机",
+      "color":  "#A0522D",
+      "icon":  "hardware",
+      "steam_app_id": 3240220,
+      "icon_asset":  "assets/games/grand_theft_auto_v/icon.png",
+      "grid_asset":  "assets/games/grand_theft_auto_v/grid.png",
+      "show_in_picker":  true,
+      "sort":  15,
+      "platforms":  {
+        "windows":  {
+          "magic_wall": {
+            "GTA5_Enhanced.exe": [
+              { "action": "allow", "protocol": "udp", "direction": "both", "local_ip": "10.126.126.0/24", "remote_ip": "10.126.126.0/24" },
+              { "action": "allow", "protocol": "udp", "direction": "both", "local_port": "6672", "remote_port": "61456" },
+              { "action": "block", "protocol": "udp", "direction": "both", "local_port": "6672" }
+            ],
+            "GTA5.exe": [
+              { "action": "allow", "protocol": "udp", "direction": "both", "local_ip": "10.126.126.0/24", "remote_ip": "10.126.126.0/24" },
+              { "action": "allow", "protocol": "udp", "direction": "both", "local_port": "6672", "remote_port": "61456" },
+              { "action": "block", "protocol": "udp", "direction": "both", "local_port": "6672" }
+            ]
+          }
+        }
+      }
+    },
+    {
       "id": "mindustry",
       "name": "Mindustry",
       "name_zh": "像素工厂",
