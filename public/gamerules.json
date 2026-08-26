@@ -7,8 +7,8 @@
                       "color":  "#5D9C3E",
                       "icon":  "terrain",
                       "sgdb_game_id":  38365,
-                      "icon_asset":  "assets/games/minecraft/icon.png",
-                      "grid_asset":  "assets/games/minecraft/grid.png",
+                      "icon_asset":  "games/minecraft/icon.png",
+                      "grid_asset":  "games/minecraft/grid.png",
                       "show_in_picker":  true,
                       "sort":  10,
                       "platforms":  {
@@ -31,8 +31,8 @@
                       "color":  "#C4A35A",
                       "icon":  "precision_manufacturing",
                       "steam_app_id":  1127400,
-                      "icon_asset":  "assets/games/mindustry/icon.png",
-                      "grid_asset":  "assets/games/mindustry/grid.png",
+                      "icon_asset":  "games/mindustry/icon.png",
+                      "grid_asset":  "games/mindustry/grid.png",
                       "show_in_picker":  true,
                       "sort":  20,
                       "platforms":  {
@@ -48,14 +48,50 @@
                                     }
                   },
                   {
+                      "id":  "forged_alliance",
+                      "name":  "Forged Alliance",
+                      "color":  "#3B6EA5",
+                      "icon":  "military_tech",
+                      "steam_app_id":  9420,
+                      "sgdb_game_id":  31467,
+                      "icon_asset":  "games/forged_alliance/icon.png",
+                      "grid_asset":  "games/forged_alliance/grid.png",
+                      "show_in_picker":  true,
+                      "sort":  25,
+                      "platforms":  {
+                                        "windows":  {
+                                                        "network":  {
+                                                                        "enable_udp_broadcast_relay":  true
+                                                                    },
+                                                        "lan_game_discover":  {
+                                                                                  "id":  "scfa",
+                                                                                  "type":  "process_udp",
+                                                                                  "parser":  "scfa_lan",
+                                                                                  "beacon_port":  15000,
+                                                                                  "process":  [
+                                                                                                  "game.exe",
+                                                                                                  "ForgedAlliance.exe",
+                                                                                                  "SupremeCommander.exe"
+                                                                                              ],
+                                                                                  "window":  [
+                                                                                                 "Forged Alliance",
+                                                                                                 "Supreme Commander"
+                                                                                             ],
+                                                                                  "title":  "{player} * Astral",
+                                                                                  "label":  "Forged Alliance"
+                                                                              }
+                                                    }
+                                    }
+                  },
+                  {
                       "id":  "raft",
                       "name":  "Raft",
                       "color":  "#2A7F9E",
                       "icon":  "sailing",
                       "steam_app_id":  648800,
                       "sgdb_game_id":  18740,
-                      "icon_asset":  "assets/games/raft/icon.png",
-                      "grid_asset":  "assets/games/raft/grid.png",
+                      "icon_asset":  "games/raft/icon.png",
+                      "grid_asset":  "games/raft/grid.png",
                       "show_in_picker":  true,
                       "sort":  22,
                       "platforms":  {
@@ -90,8 +126,8 @@
                       "color":  "#5B8C5A",
                       "icon":  "grass",
                       "steam_app_id":  413150,
-                      "icon_asset":  "assets/games/stardew_valley/icon.png",
-                      "grid_asset":  "assets/games/stardew_valley/grid.png",
+                      "icon_asset":  "games/stardew_valley/icon.png",
+                      "grid_asset":  "games/stardew_valley/grid.png",
                       "show_in_picker":  true,
                       "sort":  30,
                       "platforms":  {
@@ -109,8 +145,8 @@
                       "color":  "#2E7D5B",
                       "icon":  "forest",
                       "steam_app_id":  105600,
-                      "icon_asset":  "assets/games/terraria/icon.png",
-                      "grid_asset":  "assets/games/terraria/grid.png",
+                      "icon_asset":  "games/terraria/icon.png",
+                      "grid_asset":  "games/terraria/grid.png",
                       "show_in_picker":  true,
                       "sort":  40
                   },
@@ -120,8 +156,8 @@
                       "color":  "#4A6FA5",
                       "icon":  "ac_unit",
                       "steam_app_id":  892970,
-                      "icon_asset":  "assets/games/valheim/icon.png",
-                      "grid_asset":  "assets/games/valheim/grid.png",
+                      "icon_asset":  "games/valheim/icon.png",
+                      "grid_asset":  "games/valheim/grid.png",
                       "show_in_picker":  true,
                       "sort":  50,
                       "platforms":  {
@@ -157,8 +193,8 @@
                       "color":  "#E07A3D",
                       "icon":  "pets",
                       "steam_app_id":  1623730,
-                      "icon_asset":  "assets/games/palworld/icon.png",
-                      "grid_asset":  "assets/games/palworld/grid.png",
+                      "icon_asset":  "games/palworld/icon.png",
+                      "grid_asset":  "games/palworld/grid.png",
                       "show_in_picker":  true,
                       "sort":  60
                   },
@@ -168,19 +204,19 @@
                       "color":  "#C5753A",
                       "icon":  "factory",
                       "steam_app_id":  427520,
-                      "icon_asset":  "assets/games/factorio/icon.png",
-                      "grid_asset":  "assets/games/factorio/grid.png",
+                      "icon_asset":  "games/factorio/icon.png",
+                      "grid_asset":  "games/factorio/grid.png",
                       "show_in_picker":  true,
                       "sort":  70
                   },
                   {
                       "id":  "dont_starve_together",
-                      "name":  "Don\u0027t Starve Together",
+                      "name":  "Don't Starve Together",
                       "color":  "#8B5A2B",
                       "icon":  "outdoors",
                       "steam_app_id":  322330,
-                      "icon_asset":  "assets/games/dont_starve_together/icon.png",
-                      "grid_asset":  "assets/games/dont_starve_together/grid.png",
+                      "icon_asset":  "games/dont_starve_together/icon.png",
+                      "grid_asset":  "games/dont_starve_together/grid.png",
                       "show_in_picker":  true,
                       "sort":  80
                   },
@@ -190,8 +226,8 @@
                       "color":  "#6B4F3A",
                       "icon":  "coronavirus",
                       "steam_app_id":  108600,
-                      "icon_asset":  "assets/games/project_zomboid/icon.png",
-                      "grid_asset":  "assets/games/project_zomboid/grid.png",
+                      "icon_asset":  "games/project_zomboid/icon.png",
+                      "grid_asset":  "games/project_zomboid/grid.png",
                       "show_in_picker":  true,
                       "sort":  90
                   },
@@ -201,8 +237,8 @@
                       "color":  "#8B1E3F",
                       "icon":  "nightlight",
                       "steam_app_id":  1604030,
-                      "icon_asset":  "assets/games/v_rising/icon.png",
-                      "grid_asset":  "assets/games/v_rising/grid.png",
+                      "icon_asset":  "games/v_rising/icon.png",
+                      "grid_asset":  "games/v_rising/grid.png",
                       "show_in_picker":  true,
                       "sort":  100
                   },
@@ -212,8 +248,8 @@
                       "color":  "#E8A838",
                       "icon":  "precision_manufacturing",
                       "steam_app_id":  526870,
-                      "icon_asset":  "assets/games/satisfactory/icon.png",
-                      "grid_asset":  "assets/games/satisfactory/grid.png",
+                      "icon_asset":  "games/satisfactory/icon.png",
+                      "grid_asset":  "games/satisfactory/grid.png",
                       "show_in_picker":  true,
                       "sort":  110
                   },
@@ -223,8 +259,8 @@
                       "color":  "#5C4033",
                       "icon":  "warning",
                       "steam_app_id":  251570,
-                      "icon_asset":  "assets/games/seven_days_to_die/icon.png",
-                      "grid_asset":  "assets/games/seven_days_to_die/grid.png",
+                      "icon_asset":  "games/seven_days_to_die/icon.png",
+                      "grid_asset":  "games/seven_days_to_die/grid.png",
                       "show_in_picker":  true,
                       "sort":  120
                   },
@@ -234,8 +270,8 @@
                       "color":  "#3D7A5C",
                       "icon":  "pets",
                       "steam_app_id":  346110,
-                      "icon_asset":  "assets/games/ark/icon.png",
-                      "grid_asset":  "assets/games/ark/grid.png",
+                      "icon_asset":  "games/ark/icon.png",
+                      "grid_asset":  "games/ark/grid.png",
                       "show_in_picker":  true,
                       "sort":  130
                   },
@@ -245,46 +281,10 @@
                       "color":  "#A0522D",
                       "icon":  "hardware",
                       "steam_app_id":  252490,
-                      "icon_asset":  "assets/games/rust/icon.png",
-                      "grid_asset":  "assets/games/rust/grid.png",
+                      "icon_asset":  "games/rust/icon.png",
+                      "grid_asset":  "games/rust/grid.png",
                       "show_in_picker":  true,
                       "sort":  140
-                  },
-                  {
-                      "id":  "forged_alliance",
-                      "name":  "Forged Alliance",
-                      "color":  "#3B6EA5",
-                      "icon":  "military_tech",
-                      "steam_app_id":  9420,
-                      "sgdb_game_id":  31467,
-                      "icon_asset":  "assets/games/forged_alliance/icon.png",
-                      "grid_asset":  "assets/games/forged_alliance/grid.png",
-                      "show_in_picker":  true,
-                      "sort":  25,
-                      "platforms":  {
-                                        "windows":  {
-                                                        "network":  {
-                                                                        "enable_udp_broadcast_relay":  true
-                                                                    },
-                                                        "lan_game_discover":  {
-                                                                                  "id":  "scfa",
-                                                                                  "type":  "process_udp",
-                                                                                  "parser":  "scfa_lan",
-                                                                                  "beacon_port":  15000,
-                                                                                  "process":  [
-                                                                                                  "game.exe",
-                                                                                                  "ForgedAlliance.exe",
-                                                                                                  "SupremeCommander.exe"
-                                                                                              ],
-                                                                                  "window":  [
-                                                                                                 "Forged Alliance",
-                                                                                                 "Supreme Commander"
-                                                                                             ],
-                                                                                  "title":  "{player} * Astral",
-                                                                                  "label":  "Forged Alliance"
-                                                                              }
-                                                    }
-                                    }
                   },
                   {
                       "id":  "other",

@@ -23,7 +23,7 @@ const defaultActions = [
     variant: 'secondary' as const
   },
   {
-    text: '体验新版',
+    text: '前往新版',
     link: 'https://next.astral.fan/',
     variant: 'secondary' as const
   },
@@ -34,7 +34,7 @@ const heroActions = actions || defaultActions;
 ---
 
 <div class="hero-wrapper">
-  <a class="astral-next-banner" href="https://next.astral.fan/">
+  <a class="astral-next-banner" href="https://next.astral.fan/" data-rift="true">
     <div class="banner-content">
       <span class="banner-icon">🎮</span>
       <span class="banner-text">Astral Game 已上线，前往 next.astral.fan</span>
@@ -58,16 +58,20 @@ const heroActions = actions || defaultActions;
     </div>
     <div class="hero-right">
       <div class="hero-actions">
-        {heroActions.map((action) => (
-          <a 
-            href={action.link} 
-            class={`action-button ${action.variant || 'secondary'}`}
-            target={action.link.startsWith('http') ? '_blank' : undefined}
-            rel={action.link.startsWith('http') ? 'noopener' : undefined}
-          >
-            <span>{action.text}</span>
-          </a>
-        ))}
+        {heroActions.map((action) => {
+          const isNext = action.link.includes('next.astral.fan');
+          return (
+            <a 
+              href={action.link} 
+              class={`action-button ${action.variant || 'secondary'}${isNext ? ' action-next' : ''}`}
+              data-rift={isNext ? 'true' : undefined}
+              target={action.link.startsWith('http') && !isNext ? '_blank' : undefined}
+              rel={action.link.startsWith('http') ? 'noopener' : undefined}
+            >
+              <span>{action.text}</span>
+            </a>
+          );
+        })}
       </div>
     </div>
   </div>
@@ -342,6 +346,245 @@ class Particle {
   }
 }
 
+function makeBolt(x1, y1, x2, y2, displace) {
+  let pts = [{ x: x1, y: y1 }, { x: x2, y: y2 }];
+  let d = displace;
+  while (d > 3) {
+    const next = [pts[0]];
+    for (let i = 0; i < pts.length - 1; i++) {
+      const a = pts[i];
+      const b = pts[i + 1];
+      next.push({
+        x: (a.x + b.x) / 2 + (Math.random() - 0.5) * d,
+        y: (a.y + b.y) / 2 + (Math.random() - 0.5) * d
+      });
+      next.push(b);
+    }
+    pts = next;
+    d *= 0.52;
+  }
+  return pts;
+}
+
+function generateCracks(ox, oy, w, h) {
+  const bolts = [];
+  const reach = Math.hypot(w, h);
+
+  const mainUp = makeBolt(ox, oy, ox + (Math.random() - 0.5) * w * 0.25, -40, 140);
+  const mainDown = makeBolt(ox, oy, ox + (Math.random() - 0.5) * w * 0.3, h + 40, 160);
+  const mainPath = mainUp.slice().reverse().concat(mainDown.slice(1));
+  bolts.push({ pts: mainUp, width: 2.4 });
+  bolts.push({ pts: mainDown, width: 2.4 });
+
+  const rays = 8 + Math.floor(Math.random() * 4);
+  for (let i = 0; i < rays; i++) {
+    const angle = (Math.PI * 2 * i) / rays + (Math.random() - 0.5) * 0.5;
+    const dist = reach * (0.45 + Math.random() * 0.55);
+    const pts = makeBolt(
+      ox,
+      oy,
+      ox + Math.cos(angle) * dist,
+      oy + Math.sin(angle) * dist,
+      70 + Math.random() * 50
+    );
+    bolts.push({ pts, width: 1.1 + Math.random() * 0.8 });
+
+    const branchCount = 1 + Math.floor(Math.random() * 3);
+    for (let b = 0; b < branchCount; b++) {
+      const from = pts[Math.floor(pts.length * (0.25 + Math.random() * 0.5))];
+      if (!from) continue;
+      const ba = angle + (Math.random() > 0.5 ? 1 : -1) * (0.5 + Math.random() * 0.9);
+      const bl = dist * (0.15 + Math.random() * 0.28);
+      bolts.push({
+        pts: makeBolt(from.x, from.y, from.x + Math.cos(ba) * bl, from.y + Math.sin(ba) * bl, 36),
+        width: 0.6 + Math.random() * 0.5
+      });
+    }
+  }
+
+  return { bolts, mainPath };
+}
+
+function pathToPolygon(pts, width) {
+  const left = [];
+  const right = [];
+  for (let i = 0; i < pts.length; i++) {
+    const prev = pts[Math.max(0, i - 1)];
+    const next = pts[Math.min(pts.length - 1, i + 1)];
+    const dx = next.x - prev.x;
+    const dy = next.y - prev.y;
+    const len = Math.hypot(dx, dy) || 1;
+    const nx = (-dy / len) * width;
+    const ny = (dx / len) * width;
+    left.push({ x: pts[i].x + nx, y: pts[i].y + ny });
+    right.push({ x: pts[i].x - nx, y: pts[i].y - ny });
+  }
+  return left.concat(right.reverse());
+}
+
+function drawPolyline(ctx, pts, maxDist, origin, lineWidth, color, glow) {
+  ctx.save();
+  ctx.lineWidth = lineWidth;
+  ctx.strokeStyle = color;
+  ctx.lineJoin = 'round';
+  ctx.lineCap = 'round';
+  if (glow) {
+    ctx.shadowColor = glow;
+    ctx.shadowBlur = 18;
+  }
+
+  ctx.beginPath();
+  let started = false;
+  for (let i = 0; i < pts.length; i++) {
+    const p = pts[i];
+    const dist = Math.hypot(p.x - origin.x, p.y - origin.y);
+    if (dist > maxDist) break;
+    if (!started) {
+      ctx.moveTo(p.x, p.y);
+      started = true;
+    } else {
+      ctx.lineTo(p.x, p.y);
+    }
+  }
+  ctx.stroke();
+  ctx.restore();
+}
+
+function playRift(originX, originY, href) {
+  if (document.getElementById('astral-rift-overlay')) return;
+
+  const overlay = document.createElement('div');
+  overlay.id = 'astral-rift-overlay';
+  overlay.setAttribute('aria-hidden', 'true');
+
+  const canvas = document.createElement('canvas');
+  canvas.className = 'astral-rift-canvas';
+  overlay.appendChild(canvas);
+  document.body.appendChild(overlay);
+  document.documentElement.classList.add('astral-rift-active');
+
+  const ctx = canvas.getContext('2d');
+  const dpr = Math.min(window.devicePixelRatio || 1, 2);
+  const w = window.innerWidth;
+  const h = window.innerHeight;
+  canvas.width = w * dpr;
+  canvas.height = h * dpr;
+  canvas.style.width = w + 'px';
+  canvas.style.height = h + 'px';
+  ctx.scale(dpr, dpr);
+
+  const origin = { x: originX, y: originY };
+  const { bolts, mainPath } = generateCracks(originX, originY, w, h);
+  const maxReach = Math.hypot(w, h) * 1.05;
+  const duration = 1600;
+  const start = performance.now();
+  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  let navigated = false;
+
+  const go = () => {
+    if (navigated) return;
+    navigated = true;
+    window.location.href = href;
+  };
+  window.setTimeout(go, duration + 120);
+
+  const tick = (now) => {
+    const t = Math.min(1, (now - start) / duration);
+    const crackT = Math.min(1, t / 0.42);
+    const crackEase = 1 - Math.pow(1 - crackT, 2);
+    const maxDist = crackEase * maxReach;
+
+    ctx.clearRect(0, 0, w, h);
+
+    const dim = Math.min(0.72, t * 1.15);
+    ctx.fillStyle = isDark ? `rgba(4, 6, 18, ${dim})` : `rgba(8, 10, 28, ${dim})`;
+    ctx.fillRect(0, 0, w, h);
+
+    const shake = t < 0.7 ? (1 - t / 0.7) * 3.2 : 0;
+    if (shake > 0.2) {
+      document.documentElement.style.setProperty('--rift-shake-x', `${(Math.random() - 0.5) * shake}px`);
+      document.documentElement.style.setProperty('--rift-shake-y', `${(Math.random() - 0.5) * shake}px`);
+    } else {
+      document.documentElement.style.setProperty('--rift-shake-x', '0px');
+      document.documentElement.style.setProperty('--rift-shake-y', '0px');
+    }
+
+    for (const bolt of bolts) {
+      const core = isDark ? 'rgba(232, 238, 255, 0.95)' : 'rgba(255, 255, 255, 0.95)';
+      const glow = isDark ? 'rgba(168, 181, 255, 0.95)' : 'rgba(102, 126, 234, 0.9)';
+      drawPolyline(ctx, bolt.pts, maxDist, origin, bolt.width + 2.8, glow, glow);
+      drawPolyline(ctx, bolt.pts, maxDist, origin, bolt.width, core, null);
+    }
+
+    if (t > 0.32) {
+      const open = Math.pow(Math.min(1, (t - 0.32) / 0.55), 1.15);
+      const riftWidth = 4 + open * Math.max(w, h) * 0.18;
+      const poly = pathToPolygon(mainPath, riftWidth);
+
+      ctx.save();
+      ctx.beginPath();
+      poly.forEach((p, i) => (i === 0 ? ctx.moveTo(p.x, p.y) : ctx.lineTo(p.x, p.y)));
+      ctx.closePath();
+      ctx.globalCompositeOperation = 'destination-out';
+      ctx.fillStyle = `rgba(0, 0, 0, ${Math.min(1, 0.4 + open)})`;
+      ctx.fill();
+      ctx.restore();
+
+      ctx.save();
+      ctx.beginPath();
+      poly.forEach((p, i) => (i === 0 ? ctx.moveTo(p.x, p.y) : ctx.lineTo(p.x, p.y)));
+      ctx.closePath();
+      ctx.strokeStyle = isDark ? 'rgba(232, 238, 255, 0.95)' : 'rgba(255, 255, 255, 0.95)';
+      ctx.lineWidth = 2 + open * 3;
+      ctx.shadowColor = isDark ? 'rgba(168, 181, 255, 1)' : 'rgba(102, 126, 234, 1)';
+      ctx.shadowBlur = 24 + open * 40;
+      ctx.stroke();
+
+      ctx.globalCompositeOperation = 'lighter';
+      const g = ctx.createRadialGradient(origin.x, origin.y, 0, origin.x, origin.y, 80 + open * 280);
+      g.addColorStop(0, `rgba(255, 255, 255, ${0.22 + open * 0.38})`);
+      g.addColorStop(0.4, isDark ? `rgba(168, 181, 255, ${0.18 * open})` : `rgba(102, 126, 234, ${0.2 * open})`);
+      g.addColorStop(1, 'rgba(0, 0, 0, 0)');
+      ctx.fillStyle = g;
+      ctx.fill();
+      ctx.restore();
+    }
+
+    if (t > 0.82) {
+      const flash = (t - 0.82) / 0.18;
+      ctx.fillStyle = `rgba(255, 255, 255, ${flash * 0.92})`;
+      ctx.fillRect(0, 0, w, h);
+    }
+
+    if (t < 1) {
+      requestAnimationFrame(tick);
+    } else {
+      go();
+    }
+  };
+
+  requestAnimationFrame(tick);
+}
+
+function initRiftNavigation() {
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  document.querySelectorAll('[data-rift="true"]').forEach((el) => {
+    el.addEventListener('click', (e) => {
+      if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
+      const href = el.getAttribute('href');
+      if (!href) return;
+      e.preventDefault();
+      if (reduced) {
+        window.location.href = href;
+        return;
+      }
+      playRift(e.clientX, e.clientY, href);
+    });
+  });
+
+}
+
 // 初始化
 document.addEventListener('DOMContentLoaded', () => {
   const textCanvas = document.getElementById('astral-canvas');
@@ -351,11 +594,18 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   
   // 初始化倒计时
+  initRiftNavigation();
   initCountdown();
 });
 
 // 倒计时功能
 function initCountdown() {
+  const daysEl = document.getElementById('days');
+  const hoursEl = document.getElementById('hours');
+  const minutesEl = document.getElementById('minutes');
+  const secondsEl = document.getElementById('seconds');
+  if (!daysEl || !hoursEl || !minutesEl || !secondsEl) return;
+
   const targetDate = new Date('2026-05-18T24:00:00').getTime();
   
   function updateCountdown() {
@@ -363,11 +613,10 @@ function initCountdown() {
     const distance = targetDate - now;
     
     if (distance < 0) {
-      // 倒计时结束
-      document.getElementById('days').textContent = '00';
-      document.getElementById('hours').textContent = '00';
-      document.getElementById('minutes').textContent = '00';
-      document.getElementById('seconds').textContent = '00';
+      daysEl.textContent = '00';
+      hoursEl.textContent = '00';
+      minutesEl.textContent = '00';
+      secondsEl.textContent = '00';
       return;
     }
     
@@ -376,10 +625,10 @@ function initCountdown() {
     const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
     const seconds = Math.floor((distance % (1000 * 60)) / 1000);
     
-    document.getElementById('days').textContent = String(days).padStart(2, '0');
-    document.getElementById('hours').textContent = String(hours).padStart(2, '0');
-    document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
-    document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+    daysEl.textContent = String(days).padStart(2, '0');
+    hoursEl.textContent = String(hours).padStart(2, '0');
+    minutesEl.textContent = String(minutes).padStart(2, '0');
+    secondsEl.textContent = String(seconds).padStart(2, '0');
   }
   
   updateCountdown();
@@ -845,6 +1094,33 @@ observer.observe(document.documentElement, {
       inset 0 1px 0 rgba(255, 255, 255, 0.15);
   }
 
+  .action-button.action-next {
+    overflow: visible;
+    color: #5b6fd6;
+    border-color: rgba(102, 126, 234, 0.38);
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.12) 0%, rgba(118, 75, 162, 0.1) 100%);
+    animation: nextGlow 2.8s ease-in-out infinite;
+  }
+
+  .action-button.action-next:hover {
+    color: #4c5ec4;
+    border-color: rgba(102, 126, 234, 0.5);
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.18) 0%, rgba(118, 75, 162, 0.14) 100%);
+    animation: none;
+    box-shadow:
+      0 0 16px rgba(102, 126, 234, 0.32),
+      inset 0 1px 0 rgba(255, 255, 255, 0.22);
+  }
+
+  @keyframes nextGlow {
+    0%, 100% {
+      box-shadow: 0 0 10px rgba(102, 126, 234, 0.18);
+    }
+    50% {
+      box-shadow: 0 0 18px rgba(102, 126, 234, 0.38);
+    }
+  }
+
   [data-theme='dark'] .action-button.primary {
     background: linear-gradient(
       135deg,
@@ -882,6 +1158,30 @@ observer.observe(document.documentElement, {
     box-shadow: 
       0 4px 12px rgba(168, 181, 255, 0.06),
       inset 0 1px 0 rgba(168, 181, 255, 0.12);
+  }
+
+  [data-theme='dark'] .action-button.action-next {
+    color: #c5cdff;
+    border-color: rgba(168, 181, 255, 0.4);
+    background: linear-gradient(135deg, rgba(168, 181, 255, 0.12) 0%, rgba(156, 136, 255, 0.1) 100%);
+    animation-name: nextGlowDark;
+  }
+
+  [data-theme='dark'] .action-button.action-next:hover {
+    color: #e8ebff;
+    border-color: rgba(168, 181, 255, 0.55);
+    background: linear-gradient(135deg, rgba(168, 181, 255, 0.18) 0%, rgba(156, 136, 255, 0.14) 100%);
+    animation: none;
+    box-shadow: 0 0 16px rgba(168, 181, 255, 0.32);
+  }
+
+  @keyframes nextGlowDark {
+    0%, 100% {
+      box-shadow: 0 0 10px rgba(168, 181, 255, 0.16);
+    }
+    50% {
+      box-shadow: 0 0 18px rgba(168, 181, 255, 0.36);
+    }
   }
 
   @keyframes float {
@@ -1105,6 +1405,37 @@ observer.observe(document.documentElement, {
     .logo-text-canvas {
       width: 250px;
       height: 75px;
+    }
+  }
+</style>
+
+<style is:global>
+  html.astral-rift-active {
+    overflow: hidden;
+  }
+
+  html.astral-rift-active body {
+    transform: translate(var(--rift-shake-x, 0px), var(--rift-shake-y, 0px));
+  }
+
+  #astral-rift-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 2147483646;
+    pointer-events: all;
+    cursor: wait;
+  }
+
+  #astral-rift-overlay .astral-rift-canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .action-button.action-next {
+      animation: none;
+      box-shadow: 0 0 12px rgba(102, 126, 234, 0.22);
     }
   }
 </style>
